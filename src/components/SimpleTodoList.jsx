@@ -11,8 +11,7 @@ const SimpleTodoList = () => {
 
     useEffect(() => {
         fetchTitleList();
-        
-    }, [fetchTitleList]);
+    }, []);
 
      useEffect(() => {
         setLocalList(titleList.map(item => ({ ...item, isEditing: false })));
