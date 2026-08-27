@@ -60,56 +60,30 @@ const ProfileSetting = () => {
     
 
     return (
-        <div className="max-w-4xl mx-auto py-4 overflow-y-auto">
-
-
-
-            <div className="bg-white shadow-xl rounded-2xl p-6 mb-8">
+        <div style={{ maxWidth: '980px', margin: '0 auto' }}>
+            <div className="settings-card">
                 <form onSubmit={handleSaveChanges}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div className="md:col-span-2 flex items-center space-x-6 pb-4">
-                            <div className="relative w-20 h-20 rounded-full flex items-center justify-center border-4 border-indigo-500 overflow-hidden">
-
-                                <img
-                                    src={selectedimage || authUser.profilePic || "/avatar.png"}
-                                    alt="Profile"
-                                    className="size-32 rounded-full object-cover border-4 "
-                                />
-
-                                <label
-                                    htmlFor="avatar-upload"
-                                    className={`
-                  absolute bottom-0 right-0 
-                  bg-base-content hover:scale-105
-                  p-2 rounded-full cursor-pointer 
-                  transition-all duration-200
-                  ${isUpdatingProfile ? "animate-pulse pointer-events-none" : ""}
-                `}
-                                >
-                                    <Camera className="w-5 h-5 text-base-200" />
-                                    <input
-                                        type="file"
-                                        id="avatar-upload"
-                                        className="hidden"
-                                        accept="image/*"
-                                        onChange={handleImageUpload}
-                                        disabled={isUpdatingProfile}
-                                    />
-                                </label>
-                            </div>
-                            <div>
-                                <h3 className="text-lg font-medium">Profile Picture</h3>
-                                <p className="text-sm text-gray-500 mb-2">JPG or PNG allowed. Max size 5MB.</p>
-                                <label className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                                    <Camera className="w-4 h-4 mr-2" />
-                                    Change Photo
-                                    <input type="file" className="sr-only" accept="image/png, image/jpeg" />
-                                </label>
-                            </div>
+                    <div className="avatar-card">
+                        <img
+                            src={selectedimage || authUser?.profilePic || '/avatar.png'}
+                            alt="Profile"
+                            className="avatar-card__image"
+                        />
+                        <div>
+                            <h3 className="settings-card__title">
+                                <Camera size={18} />
+                                Profile Picture
+                            </h3>
+                            <p className="auth-copy">JPG or PNG allowed. Max size 5MB.</p>
+                            <label className="avatar-uploader" htmlFor="avatar-upload">
+                                <Camera size={16} />
+                                Change Photo
+                                <input type="file" id="avatar-upload" className="sr-only" accept="image/*" onChange={handleImageUpload} disabled={isUpdatingProfile} />
+                            </label>
                         </div>
+                    </div>
 
-                        {/* Name Input */}
+                    <div className="summary-grid" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
                         <InputField
                             label="Full Name"
                             value={generalData.fullName}
@@ -118,7 +92,6 @@ const ProfileSetting = () => {
                             icon={User}
                         />
 
-                        {/* Email Input */}
                         <InputField
                             label="Email Address"
                             type="email"
@@ -129,28 +102,22 @@ const ProfileSetting = () => {
                         />
                     </div>
 
-                    <div className="mt-6 pt-4 border-t flex justify-end">
-                        <button
-                            onClick={handleSaveChanges}
-                            type="submit"
-                            className="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-                        >
-                            <CheckCircle className="w-5 h-5 mr-2" />
+                    <div className="toolbar" style={{ justifyContent: 'flex-end', marginTop: '0.75rem' }}>
+                        <button onClick={handleSaveChanges} type="submit" className="btn btn--primary">
+                            <CheckCircle size={16} />
                             Save General Changes
                         </button>
                     </div>
                 </form>
             </div>
 
-            {/* Security Card */}
-            <div className="bg-white shadow-xl rounded-2xl p-6">
-                <h2 className="text-xl font-semibold text-gray-800 flex items-center space-x-2 border-b pb-3 mb-4">
-                    <Lock className="w-6 h-6 text-indigo-600" />
+            <div className="settings-card">
+                <h2 className="settings-card__title">
+                    <Lock size={18} />
                     <span>Security & Password</span>
                 </h2>
                 <form onSubmit={handlePasswordChange}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Old Password */}
+                    <div className="summary-grid" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
                         <InputField
                             label="Current Password"
                             type="password"
@@ -159,9 +126,9 @@ const ProfileSetting = () => {
                             placeholder="••••••••"
                             icon={Lock}
                         />
-                        <div className="hidden md:block"></div> {/* Spacer */}
 
-                        {/* New Password */}
+                        <div></div>
+
                         <InputField
                             label="New Password"
                             type="password"
@@ -171,7 +138,6 @@ const ProfileSetting = () => {
                             icon={Lock}
                         />
 
-                        {/* Confirm New Password */}
                         <InputField
                             label="Confirm New Password"
                             type="password"
@@ -182,12 +148,9 @@ const ProfileSetting = () => {
                         />
                     </div>
 
-                    <div className="mt-6 pt-4 border-t flex justify-end">
-                        <button
-                            type="submit"
-                            className="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-                        >
-                            <CheckCircle className="w-5 h-5 mr-2" />
+                    <div className="toolbar" style={{ justifyContent: 'flex-end', marginTop: '0.75rem' }}>
+                        <button type="submit" className="btn btn--primary">
+                            <CheckCircle size={16} />
                             Update Password
                         </button>
                     </div>

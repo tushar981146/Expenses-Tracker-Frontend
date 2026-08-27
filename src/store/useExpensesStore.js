@@ -7,12 +7,14 @@ export const useExpensesStore = create((set) => ({
     expenses: [],
     titleList: [],
     isLoading: false,
+    currentTitle: null,
+    setCurrentTitle: (title) => set({ currentTitle: title }),
 
 
-    fetchExpenses: async (id) => {
+    fetchExpenses: async (id, budgetId) => {
         set({ isLoading: true });
         try {
-            const response = await axiosInstance.get(`/expenses/get/${id}`);
+            const response = await axiosInstance.post(`/expenses/get/${id}`, { budgetId });
             set({ expenses: response.data });
         } catch (error) {
             toast.error('Failed to fetch expenses');
@@ -57,6 +59,8 @@ export const useExpensesStore = create((set) => ({
         set({ isLoading: true });
         try {
             const response = await axiosInstance.get('/expenses/title-fetch');
+
+            console.log("this is title obj", response.data)
 
 
             const listWithEditing = response.data.map(item => ({

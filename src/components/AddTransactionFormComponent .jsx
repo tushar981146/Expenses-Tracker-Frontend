@@ -15,9 +15,9 @@ const transactionTypes = ['Expense', 'Income'];
 
 // Helper component for structuring input fields
 const InputGroup = ({ label, icon: Icon, children }) => (
-    <div className="flex flex-col space-y-1">
-        <label className="text-sm font-medium text-gray-700 flex items-center space-x-1">
-            <Icon className="w-4 h-4 text-indigo-500" />
+    <div className="transaction-field">
+        <label className="transaction-field__label">
+            <Icon size={16} />
             <span>{label}</span>
         </label>
         {children}
@@ -40,7 +40,7 @@ const AddTransactionFormComponent = () => {
     const id = authUser ? authUser._id : null;
     
 
-    const { addExpense } = useExpensesStore();
+    const { addExpense, currentTitle } = useExpensesStore();
 
     // NOTE: If you were using this component in a production environment, 
     // you would replace the usage of 'alert' with a custom modal or toast notification.
@@ -63,28 +63,29 @@ const AddTransactionFormComponent = () => {
         addExpense({
             ...formData,
             amount: parsedAmount,
+            titleId: currentTitle
              
         }, id);
     };
 
     return (
-        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-4xl mx-auto my-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center space-x-2">
-                <Plus className="w-6 h-6 text-indigo-600" />
+            <div className="form-card">
+            <h3>
+                <Plus size={18} style={{ display: 'inline-block', marginRight: '0.45rem' }} />
                 <span>Add New Transaction</span>
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <form onSubmit={handleSubmit}>
+                <div className="transaction-form-grid">
 
                     {/* Description */}
-                    <div className="lg:col-span-2">
+                    <div className="transaction-field--wide">
                         <InputGroup label="Description" icon={FileText}>
                             <input
                                 type="text"
                                 value={formData.description}
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                 placeholder="e.g., Dinner with client"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
+                                className="transaction-field__control"
                                 required
                             />
                         </InputGroup>
@@ -99,7 +100,7 @@ const AddTransactionFormComponent = () => {
                             placeholder="100.00"
                             step="0.01"
                             min="0.01"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
+                            className="transaction-field__control"
                             required
                         />
                     </InputGroup>
@@ -109,7 +110,7 @@ const AddTransactionFormComponent = () => {
                         <select
                             value={formData.type}
                             onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                            className="transaction-field__control"
                         >
                             {transactionTypes.map(t => (
                                 <option key={t} value={t}>{t}</option>
@@ -122,7 +123,7 @@ const AddTransactionFormComponent = () => {
                         <select
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                            className="transaction-field__control"
                             required
                         >
                             {categories.map(c => (
@@ -137,20 +138,16 @@ const AddTransactionFormComponent = () => {
                             type="date"
                             value={formData.date}
                             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                            className="transaction-field__control"
                             required
                         />
                     </InputGroup>
 
                 </div>
 
-                {/* Submit Button */}
-                <div className="pt-4 flex justify-end">
-                    <button
-                        type="submit"
-                        className="inline-flex items-center px-8 py-3 border border-transparent shadow-md text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors transform hover:scale-[1.01]"
-                    >
-                        <Plus className="w-5 h-5 mr-2" />
+                <div className="toolbar" style={{ justifyContent: 'flex-end', marginTop: '0.8rem' }}>
+                    <button type="submit" className="btn btn--primary">
+                        <Plus size={16} />
                         Record Transaction
                     </button>
                 </div>

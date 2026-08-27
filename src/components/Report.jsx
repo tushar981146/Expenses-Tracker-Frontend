@@ -27,29 +27,27 @@ function Report() {
 
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-
-
-      {/* Monthly Spending Bar Chart */}
-      <SpendingBarChart expenses={expenses} />
-
-      {/* Income vs. Expenses Donut Chart */}
-      <div className="col-span-1">
-        <IncomeExpenseDonut expenses={expenses} />
+    <div>
+      <div className="toolbar">
+        <h2 className="page-header__title">Reports</h2>
+        <select value={selectedCategory} onChange={handleSelectChange} className="select-field">
+          <option value="">-- Select Report --</option>
+          {titleList.map((c) => (
+            <option key={c._id} value={c._id}>{c.title}</option>
+          ))}
+        </select>
       </div>
 
-      <select
-        value={selectedCategory}
-        onChange={handleSelectChange}
-        className="w-full sm:w-48 px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-700 text-sm"
-      >
-        <option value="">-- Select Report --</option>
-        {titleList.map((c) => (
-          <option key={c._id} value={c._id}>{c.title}</option>
-        ))}
-      </select>
+      <div className="report-grid">
+        <div className="chart-card">
+          <SpendingBarChart expenses={expenses} />
+        </div>
+        <div className="chart-card">
+          <IncomeExpenseDonut expenses={expenses} />
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Report

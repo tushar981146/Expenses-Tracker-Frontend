@@ -1,5 +1,5 @@
 const FinanceIllustration = () => (
-    <svg viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+    <svg viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="finance-illustration">
         {/* Abstract Wave Background (Soft Blue/Purple) */}
         <path d="M0 300C120 280 250 150 500 180V300H0Z" fill="#E0E7FF" opacity="0.6"/>
         <circle cx="450" cy="280" r="150" fill="#C7D2FE" opacity="0.3"/>

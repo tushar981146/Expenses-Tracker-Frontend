@@ -48,9 +48,9 @@ function HomeDashboard() {
 
     };
     return (
-        <div className="space-y-6">
+        <div className="dashboard-content">
             {/* Summary Cards Section (Responsive Grid) */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="summary-grid">
                 <SummaryCard
                     title="Total Balance"
                     value={balance}
@@ -80,13 +80,13 @@ function HomeDashboard() {
             </div>
 
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
+            <div className="toolbar">
                 
                 {/* Dropdown */}
                 <select
                     value={selectedCategory}
                     onChange={handleSelectChange}
-                    className="w-full sm:w-48 px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-700 text-sm"
+                    className="select-field"
                 >
                     <option value="">-- Select Report --</option>
                     {titleList.map((c) => (

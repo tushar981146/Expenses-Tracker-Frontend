@@ -4,31 +4,29 @@ const SummaryCard = ({ title, value, icon: Icon, colorClass, isGoal, goalPercent
     const formattedValue = isGoal ? `${goalPercentage}% reached` : formatCurrency(value);
     
     // Determine goal bar color and progress width
-    const goalColor = goalPercentage >= 100 ? 'bg-green-500' : 'bg-yellow-500';
+    const goalColor = goalPercentage >= 100 ? 'summary-card__bar-fill--success' : 'summary-card__bar-fill--warning';
     const goalWidth = goalPercentage > 100 ? '100%' : `${goalPercentage}%`;
 
     return (
-        <div className="bg-white p-5 rounded-xl shadow-md border border-gray-100 transition-shadow hover:shadow-lg">
-            <div className="flex justify-between items-start mb-3">
-                <p className="text-sm font-medium text-gray-500">{title}</p>
-                <div className={`p-2 rounded-full ${colorClass} bg-opacity-10`}>
-                    <Icon className={`w-5 h-5 ${colorClass}`} />
+        <div className="summary-card">
+            <div className="summary-card__header">
+                <p className="summary-card__title">{title}</p>
+                <div className="summary-card__icon">
+                    <Icon size={18} />
                 </div>
             </div>
             
-            <p className="text-3xl font-bold text-gray-900 mb-1">
-                {formattedValue}
-            </p>
+            <p className="summary-card__value">{formattedValue}</p>
 
             {isGoal && (
-                <div className="mt-2">
-                    <div className="w-full bg-gray-200 rounded-full h-2.5">
+                <div>
+                    <div className="summary-card__bar">
                         <div 
-                            className={`h-2.5 rounded-full transition-all duration-500 ease-out ${goalColor}`} 
+                            className={`summary-card__bar-fill ${goalColor}`}
                             style={{ width: goalWidth }}
                         ></div>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">Goal: $6,000</p>
+                    <p className="summary-card__title" style={{ marginTop: '0.4rem' }}>Goal: $6,000</p>
                 </div>
             )}
         </div>

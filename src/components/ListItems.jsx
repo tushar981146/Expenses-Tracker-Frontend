@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ListItem = ({ item }) => {
   const [editTitle, setEditTitle] = useState(item.title);
-  const { isLoading, updateTitleList, deleteTitleList, toggleEdit } = useExpensesStore();
+  const { isLoading, updateTitleList, deleteTitleList, toggleEdit, setCurrentTitle } = useExpensesStore();
   const navigate = useNavigate();
 
 
@@ -23,11 +23,12 @@ const ListItem = ({ item }) => {
   };
 
   const handleDivClick = (id) => {
-        
+
+    setCurrentTitle(id)
     navigate(`/expenses/${id}`); 
   };
   return (
-    <div  className="flex items-center justify-between p-4 bg-gray-50 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 mb-3">
+    <div className="list-item">
       {item.isEditing ? (
         <input
           type="text"
@@ -36,28 +37,24 @@ const ListItem = ({ item }) => {
           onBlur={handleUpdate}
           onKeyDown={(e) => e.key === 'Enter' && handleUpdate()}
           autoFocus
-          className="flex-grow mr-4 px-3 py-2 border-2 border-indigo-400 rounded-lg focus:outline-none text-gray-800"
+          className="input-field__control"
         />
       ) : (
-        <span onClick={() => handleDivClick(item._id)} className="text-lg cursor-pointer font-medium text-gray-800 break-words pr-4 flex-grow">
+        <span onClick={() => handleDivClick(item.id)} className="list-item__text">
           {item.title}
         </span>
       )}
 
-      <div className="flex space-x-2 shrink-0">
+      <div className="list-item__actions">
         <button
           onClick={() => item.isEditing ? handleUpdate() : toggleEdit(item._id)}
-          className={`p-2 rounded-full transition-colors ${item.isEditing ? 'bg-green-500 text-white hover:bg-green-600' : 'text-indigo-600 hover:bg-indigo-100'}`}
-          title={item.isEditing ? "Save" : "Edit"}
+          className="icon-btn"
+          title={item.isEditing ? 'Save' : 'Edit'}
         >
-          {item.isEditing ? <Check className="w-5 h-5" /> : <Edit className="w-5 h-5" />}
+          {item.isEditing ? <Check size={16} /> : <Edit size={16} />}
         </button>
-        <button
-          onClick={handleDelete}
-          className="p-2 rounded-full text-red-600 hover:bg-red-100 transition-colors"
-          title="Delete"
-        >
-          <Trash2 className="w-5 h-5" />
+        <button onClick={handleDelete} className="icon-btn" title="Delete">
+          <Trash2 size={16} />
         </button>
       </div>
     </div>

@@ -1,9 +1,9 @@
-const FeatureCard = ({ icon: Icon, title, description }) => (
-    <div className="flex flex-col items-center text-center p-4">
-        <div className="p-3 bg-indigo-100/50 rounded-xl mb-3">
-            <Icon className="w-6 h-6 text-indigo-600" />
+const FeatureCard = ({ icon: Icon, title }) => (
+    <div className="feature-card">
+        <div className="feature-card__icon">
+            <Icon size={18} />
         </div>
-        <p className="font-semibold text-gray-800">{title}</p>
+        <p>{title}</p>
     </div>
 );
 

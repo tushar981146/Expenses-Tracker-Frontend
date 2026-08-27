@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 const FinanceIllustration = () => (
-    <svg viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+    <svg viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="finance-illustration">
         {/* Abstract Wave Background (Soft Blue/Purple) */}
         <path d="M0 300C120 280 250 150 500 180V300H0Z" fill="#E0E7FF" opacity="0.6"/>
         <circle cx="450" cy="280" r="150" fill="#C7D2FE" opacity="0.3"/>
@@ -58,70 +58,51 @@ const FinanceIllustration = () => (
 
 
 const Dashboard = () => {
-    
-    return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-2 sm:p-4 font-inter scroll-smooth">
-
-            <div className="w-full  shadow-2xl rounded-xl sm:rounded-3xl overflow-hidden bg-white/10 ring-4 ring-gray-900">
-                
- 
-                <div className="bg-gray-800 p-2 pt-1 rounded-t-xl sm:rounded-t-3xl border-b-2 border-gray-700">
-                    <div className="flex items-center justify-between">
-
-                        <div className="flex space-x-2">
-                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                        </div>
-                        <div className="text-xs text-gray-400 hidden sm:block">WalletWise - Track & Save</div>
-                        <div className="w-8"></div> 
-                    </div>
-                </div>
-
-              
-                <div className="bg-white rounded-b-xl sm:rounded-b-3xl min-h-screen w-full">
-                    
-                    <Header />
-                    
-                    <div className="grid md:grid-cols-2 gap-8 p-4 sm:p-8 lg:p-16">
-                        
-                        <div className="order-2 md:order-1 flex justify-center items-center">
-                            <FinanceIllustration />
-                        </div>
-
-                        <div className="order-1 md:order-2 flex flex-col justify-center space-y-6 sm:space-y-8">
-                            
-                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-                                WalletWise: <span className="text-indigo-600">Track & Save</span>
-                            </h1>
-                            <p className="text-base sm:text-lg text-gray-500 max-w-md">
-                                Your personal expense manager for a healthier financial life. Achieve your goals with smart tools.
-                            </p>
-
-                            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
-                                <Link to="/signup" className="w-full cursor-pointer sm:w-auto px-6 sm:px-8 py-3 text-base sm:text-lg font-medium text-white rounded-xl shadow-lg 
-                                                   bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 
-                                                   transition-all transform hover:scale-105">
-                                    Sign Up
-                                </Link>
-                                <Link to="/login" className="w-full cursor-pointer sm:w-auto px-6 sm:px-8 py-3 text-base sm:text-lg font-medium text-indigo-600 bg-indigo-50 rounded-xl 
-                                                   ring-1 ring-indigo-300 hover:bg-indigo-100 transition-colors">
-                                    Log In
-                                </Link>
-                            </div>
-                            
-                            <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-gray-200">
-                                <FeatureCard icon={ListChecks} title="Easy Tracking" />
-                                <FeatureCard icon={Cloud} title="Secure Data" />
-                                <FeatureCard icon={Calendar} title="Smart Saving" />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+  return (
+    <div className="auth-shell">
+      <div className="auth-card">
+        <div className="auth-card__panel auth-card__panel--accent">
+          <div className="auth-card__eyebrow">WalletWise • Finance made calm</div>
+          <h1 className="auth-heading auth-heading--light">Track your spending with clarity.</h1>
+          <p className="auth-copy auth-copy--light">
+            Keep every expense, income, and goal in one place with a dashboard that stays fast and calm on any device.
+          </p>
+          <div className="hero-stack" style={{ marginTop: '1.25rem' }}>
+            <div className="hero-actions">
+              <Link to="/signup" className="btn btn--primary">
+                Create account
+              </Link>
+              <Link to="/login" className="btn btn--secondary">
+                Sign in
+              </Link>
             </div>
+            <div className="feature-grid">
+              <FeatureCard icon={ListChecks} title="Easy Tracking" />
+              <FeatureCard icon={Cloud} title="Secure Data" />
+              <FeatureCard icon={Calendar} title="Smart Saving" />
+            </div>
+          </div>
         </div>
-    );
+
+        <div className="auth-card__panel">
+          <Header />
+          <div className="dashboard-hero">
+            <div className="dashboard-hero__content">
+              <h2 className="dashboard-hero__title">
+                WalletWise: <span>Track & Save</span>
+              </h2>
+              <p className="dashboard-hero__copy">
+                A personal finance workspace that helps you understand your habits, spot trends, and stay focused on your goals.
+              </p>
+            </div>
+            <div className="dashboard-hero__illustration">
+              <FinanceIllustration />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;

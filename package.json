@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.12.2",
     "install": "^0.13.0",
     "lucide-react": "^0.544.0",
@@ -20,7 +19,7 @@
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.9.3",
     "recharts": "^3.2.1",
-    "tailwindcss": "^4.1.13",
+    "scss": "^0.2.4",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
@@ -32,6 +31,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "sass": "^1.101.0",
     "vite": "^7.1.7"
   }
 }
