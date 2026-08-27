@@ -60,7 +60,6 @@ export const useExpensesStore = create((set) => ({
         try {
             const response = await axiosInstance.get('/expenses/title-fetch');
 
-            console.log("this is title obj", response.data)
 
 
             const listWithEditing = response.data.map(item => ({

@@ -21,7 +21,6 @@ const TransactionsTable = () => {
         fetchExpenses(_id, currentTitle);
     }, [fetchExpenses]);
 
-    console.log("this is expenses", expenses)
 
 
 
